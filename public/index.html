@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Command Logs (Socket.IO)</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      #logs { 
+        background: #111; 
+        color: #0f0; 
+        padding: 10px; 
+        height: 400px; 
+        overflow-y: auto; 
+        white-space: pre-wrap; 
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Live Command Logs</h2>
+    <div id="logs"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const logDiv = document.getElementById('logs');
+      const socket = io();
+
+      socket.on('log', function(msg) {
+        logDiv.textContent += msg + '\n';
+        logDiv.scrollTop = logDiv.scrollHeight;
+      });
+    </script>
+  </body>
+</html>
