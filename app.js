@@ -10,13 +10,31 @@ const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const generateUniqueId = require('generate-unique-id');
+
+app.get("/", (req, res) => {
+
+  res.sendFile(__dirname + '/public/html/menu.html');
+});
+
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
 
   // Run your shell command when a client connects
-  const cmd = spawn('cmd.exe', ['/c', 'C:\\Project\\cfw_nxp\\project\\VCU-P-NXP-M7-BSW\\Tools\\install_tools.bat']);
+  const cmd = spawn('python', ['--version']);
 
-  console.log("log", cmd)
+  //console.log("log", cmd)
+
+  // example 1
+  const id1 = generateUniqueId();
+
+  // example 2
+  const id2 = generateUniqueId({
+  length: 32,
+  useLetters: false
+  });
+
+  console.log("unique id ", id1, id2, id3);
 
   cmd.stdout.on('data', (data) => {
     socket.emit('log', data.toString());
