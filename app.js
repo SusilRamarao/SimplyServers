@@ -9,12 +9,22 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
 const generateUniqueId = require('generate-unique-id');
 
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
 
-  res.sendFile(__dirname + '/public/html/menu.html');
+  res.sendFile(__dirname + '/public/menu.html');
+});
+
+app.post('/get-files', (req, res) => {
+  
+  console.log('Received folders:', req.body);
+  //const { folders } = req.body;
+  //console.log('Received folders:', folders);
+  // Do something with the folder names
+  //res.sendStatus(200);
 });
 
 io.on('connection', (socket) => {
