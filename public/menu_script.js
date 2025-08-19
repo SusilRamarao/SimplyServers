@@ -54,7 +54,6 @@ function uploadFolder(files) {
       .map(file => {
         const path = file.webkitRelativePath || file.name;
         return path;
-        //return parts.join('/');
       })
       .filter(folder => folder) // Remove empty strings
   ));

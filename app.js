@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
   useLetters: false
   });
 
-  console.log("unique id ", id1, id2, id3);
+  console.log("unique id ", id1, id2);
 
   cmd.stdout.on('data', (data) => {
     socket.emit('log', data.toString());
